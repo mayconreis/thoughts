@@ -20,7 +20,7 @@
         <ul>
             <!-- URL after authentication -->
             <li><a href="/">Pensamentos</a></li>
-            {{#if session.userid}}
+            {{#if session.userId}}
             <li><a href="/toughts/dashboard">Dashboard</a></li>
             <li><a href="/logout">Logout</a></li>
             {{else}}

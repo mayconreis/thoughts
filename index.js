@@ -63,7 +63,7 @@ app.use(express.static('public'))
 // set session response
 app.use((req, res, next) => {
     
-    if(req.session.userid) {
+    if(req.session.userId) {
         res.locals.session = req.session
     }
 
