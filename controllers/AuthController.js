@@ -30,7 +30,7 @@ module.exports = class AuthControler {
         }
 
         // initialize session
-        req.session.userid = user.id
+        req.session.userId = user.id
 
         req.flash('message', 'Login successfully!')
 
@@ -95,7 +95,7 @@ module.exports = class AuthControler {
         await User.create(user)
             .then((user) => {
 
-                req.session.userid = user.id
+                req.session.userId = user.id
 
                 req.flash('message', 'Registered successfully!')
 
