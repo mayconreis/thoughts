@@ -77,4 +77,9 @@ module.exports = class AuthControler {
                 console.log(err)
             })
     }
+
+    static logout(req, res) {
+        req.session.destroy()
+        res.redirect('/login')
+    }
 }
