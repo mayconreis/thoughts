@@ -24,7 +24,7 @@ module.exports = class ThoughtController {
 
         let emptyThoughts = false
 
-        if(thoughts.length === 0){
+        if (thoughts.length === 0) {
             emptyThoughts = true
         }
 
@@ -52,6 +52,39 @@ module.exports = class ThoughtController {
         await Thought.create(thought)
             .then(() => {
                 req.flash('message', 'Thought create succesfully!')
+                req.session.save(() => {
+                    res.redirect('/thoughts/dashboard')
+                })
+            })
+            .catch((err) => console.log(err))
+
+    }
+
+    static async updateThought(req, res) {
+        const id = req.params.id
+
+        const thought = await Thought.findOne({
+            where: { id: id },
+            raw: true,
+        })
+            .then(thought => {
+                res.render('thoughts/edit', { thought })
+            })
+            .catch((err) => console.log(err))
+    }
+
+    static async updateThoughtPost(req, res) {
+
+        const id = req.body.id
+        const tought = {
+            title: req.body.title
+        }
+
+        await Thought.update(tought, {
+            where: { id: id }
+        })
+            .then(() => {
+                req.flash('message', 'Thought edit succesfully!')
                 req.session.save(() => {
                     res.redirect('/thoughts/dashboard')
                 })
