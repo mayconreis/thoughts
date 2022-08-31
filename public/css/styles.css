@@ -24,6 +24,7 @@
 #navbar ul {
     display: flex;
     list-style: none;
+    align-items: center;
 }
 
 #navbar li {
@@ -38,6 +39,10 @@
 
 #navbar ul li a:hover {
     color: #F6982D;
+}
+
+#navbar .icon {
+    width: 50px;
 }
 
 /* CONTAINER */
