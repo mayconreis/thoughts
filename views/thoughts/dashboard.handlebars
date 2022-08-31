@@ -1,16 +1,16 @@
 <div class="dashboard">
     <div class="title-container">
         <h2>Dashboard</h2>
-        <a href="/toughts/add" class="btn">Create Tought</a>
+        <a href="/thoughts/add" class="btn">Create Thought</a>
     </div>
-    <h3>Your Toughts</h3>
+    <h3>Your Thoughts</h3>
     <ul>
-        {{#each toughts}}
+        {{#each thoughts}}
         <li>
             <span class="label">{{this.title}}</span>
             <span class="actions">
                 <a href="/" class="btn">Edit</a>
-                <form action="/toughts/delete" method="post">
+                <form action="/thoughts/delete" method="post">
                     <input type="hidden" name="id" value="{{this.id}}">
                     <input type="submit" value="Delete" class="btn">
                 </form>
@@ -18,4 +18,9 @@
         </li>
         {{/each}}
     </ul>
+    {{#if emptyThoughts}}
+        <p>Don't have  thoughts...</p>
+    {{else}}
+
+    {{/if}}
 </div>

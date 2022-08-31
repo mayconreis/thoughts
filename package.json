@@ -1,5 +1,5 @@
 {
-  "name": "toughts",
+  "name": "thoughts",
   "version": "1.0.0",
   "description": "Projeto utilizando a arquitetura MVC com Node e MySQL",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "start": "nodemon index.js localhost 3000"
   },
   "keywords": [
-    "toughts"
+    "thoughts"
   ],
   "author": "Maycon Reis <mayconreis221@gmail.com>",
   "license": "MIT",

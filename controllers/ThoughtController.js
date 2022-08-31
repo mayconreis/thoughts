@@ -1,9 +1,9 @@
-const Tought = require('../models/Tought');
+const Thought = require('../models/Thought');
 const User = require('../models/User');
 
-module.exports = class ToughtController {
-    static async showToughts(req, res) {
-        res.render('toughts/home')
+module.exports = class ThoughtController {
+    static async showThoughts(req, res) {
+        res.render('thoughts/home')
     }
 
     static async dashboard(req, res) {
@@ -12,7 +12,7 @@ module.exports = class ToughtController {
 
         const user = await User.findOne({
             where: { id: userId },
-            include: Tought,
+            include: Thought,
             plain: true,
         })
 
@@ -20,16 +20,22 @@ module.exports = class ToughtController {
             res.redirect('/login')
         }
 
-        const toughts = user.Toughts.map((result) => result.dataValues)
+        const thoughts = user.Thoughts.map((result) => result.dataValues)
 
-        res.render('toughts/dashboard', { toughts })
+        let emptyThoughts = false
+
+        if(thoughts.length === 0){
+            emptyThoughts = true
+        }
+
+        res.render('thoughts/dashboard', { thoughts, emptyThoughts })
     }
 
-    static createTought(req, res) {
-        res.render('toughts/create')
+    static createThought(req, res) {
+        res.render('thoughts/create')
     }
 
-    static async createToughtPost(req, res) {
+    static async createThoughtPost(req, res) {
         const userId = req.session.userId
 
         const user = await User.findOne({ where: { id: userId } })
@@ -38,34 +44,34 @@ module.exports = class ToughtController {
             res.redirect('/login')
         }
 
-        const tought = {
+        const thought = {
             title: req.body.title,
             UserId: req.session.userId
         }
 
-        await Tought.create(tought)
+        await Thought.create(thought)
             .then(() => {
-                req.flash('message', 'Tought create succesfully!')
+                req.flash('message', 'Thought create succesfully!')
                 req.session.save(() => {
-                    res.redirect('/toughts/dashboard')
+                    res.redirect('/thoughts/dashboard')
                 })
             })
             .catch((err) => console.log(err))
 
     }
 
-    static async deleteTought(req, res) {
+    static async deleteThought(req, res) {
 
         const id = req.body.id
         const userId = req.session.userId
 
-        await Tought.destroy({
+        await Thought.destroy({
             where: { id: id, UserId: userId }
         })
             .then(() => {
-                req.flash('message', 'Tought delete succesfully!')
+                req.flash('message', 'Thought delete succesfully!')
                 req.session.save(() => {
-                    res.redirect('/toughts/dashboard')
+                    res.redirect('/thoughts/dashboard')
                 })
             })
             .catch((err) => console.log(err))
