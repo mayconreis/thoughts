@@ -21,7 +21,6 @@ module.exports = class ToughtController {
         }
 
         const toughts = user.Toughts.map((result) => result.dataValues)
-        console.log(toughts)
 
         res.render('toughts/dashboard', { toughts })
     }
@@ -46,8 +45,26 @@ module.exports = class ToughtController {
 
         await Tought.create(tought)
             .then(() => {
+                req.flash('message', 'Tought create succesfully!')
                 req.session.save(() => {
-                    req.flash('message', 'Tought create succesfully!')
+                    res.redirect('/toughts/dashboard')
+                })
+            })
+            .catch((err) => console.log(err))
+
+    }
+
+    static async deleteTought(req, res) {
+
+        const id = req.body.id
+        const userId = req.session.userId
+
+        await Tought.destroy({
+            where: { id: id, UserId: userId }
+        })
+            .then(() => {
+                req.flash('message', 'Tought delete succesfully!')
+                req.session.save(() => {
                     res.redirect('/toughts/dashboard')
                 })
             })
