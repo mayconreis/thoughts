@@ -48,7 +48,7 @@ app.use(
             secure: false,
             maxAge: 3600000,
             expires: new Date(Date.now() + 3600000),
-            httpsOnly: true
+            httpOnly: true
         }
     })
 )
