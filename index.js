@@ -5,7 +5,7 @@ const FileStore = require('session-file-store')(session)
 const flash = require('express-flash')
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 const conn = require('./db/conn')
 
@@ -49,7 +49,7 @@ app.use(
             secure: false,
             maxAge: 3600000,
             expires: new Date(Date.now() + 3600000),
-            httpOnly: true
+            httpsOnly: true
         }
     })
 )
