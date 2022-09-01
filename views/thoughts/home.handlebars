@@ -1,1 +1,40 @@
-<h1>All Thoughts</h1>
+<div class="home-header">
+    {{#if search}}
+        <h1>Search for: <span>{{search}}</span></h1>
+        {{#if thoughtsQty}}
+            <p><span>{{thoughtsQty}}</span> results found</p>
+        {{else}}
+            <p>No results found</p>
+        {{/if}}
+    {{else}}
+        <h1>All Thoughts</h1>
+    {{/if}}
+    <form action="/">
+        <input type="text" name="search" placeholder="Type something to search" value="{{search}}">
+        <input type="submit" value="Search" class="btn">
+    </form>
+    <div class="order-container">
+        <span>Order to:</span>
+        <form action="/" method="get">
+            <input type="hidden" name="search" value="{{this.search}}">
+            <input type="hidden" name="order" value="new">
+            <button type="submit"><i class="bi bi-arrow-up"></i></button>
+        </form>
+        <form action="/" method="get">
+            <input type="hidden" name="search" value="{{this.search}}">
+            <input type="hidden" name="order" value="old">
+            <button type="submit"><i class="bi bi-arrow-down"></i></button>
+        </form>
+        <a href="/">Clear</a>
+    </div>
+</div>
+<div class="thoughts-container">
+    {{#each thoughts}}
+    <figure>
+        <blockquote>
+            "{{this.title}}"
+        </blockquote>
+        <figcaption>from <span>{{this.User.name}}</span> - {{this.createdAt}}</figcaption>
+    </figure>
+    {{/each}}
+</div>
