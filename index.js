@@ -5,7 +5,6 @@ const FileStore = require('session-file-store')(session)
 const flash = require('express-flash')
 
 const app = express()
-const port = process.env.PORT
 
 const conn = require('./db/conn')
 
@@ -80,7 +79,7 @@ conn.sync({
     force: false
 })
 .then(() => {
-    app.listen(port, () => console.log(`App rodando na porta ${port}!`))
+    app.listen(process.env.PORT || 3000, () => console.log(`App rodando na porta ${process.env.PORT}!`))
 })
 .catch((err) => {
     console.log(err)
