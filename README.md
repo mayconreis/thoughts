@@ -11,3 +11,25 @@ Sistema Web desenvolvido utilizando a arquitetura MVC com NodeJs, Express, Handl
 - `Registro`: É possível realizar registro no sistema para gerenciar seus pensamentos.
 - `Login`: Depois de registrado no sistema você pode fazer login e ter acesso ao seu Dashboard pessoal de pensamentos.
 - `Criar/Alterar/Deletar`: Você pode fazer tudo que quiser com seus pensamentos.
+
+## 🛠️ Abrir e rodar o projeto
+Após baixar o projeto, você pode executa-lo seguindos os passos abaixo:
+* Copie o arquivo .env.example para o arquivo .env
+  ```
+    cp .env.example .env
+  ```
+* Abra o terminal e rode os comandos abaixo
+  ```
+  npm install
+  npm run dev
+  ```
+
+## :heavy_check_mark: Técnicas e tecnologias utilizadas
+* ``Node.js``
+* ``Handlebars``
+* ``Sequelize``
+* ``Arquitetura MVC``
+
+## Autores
+| [<img src="https://avatars.githubusercontent.com/u/40437688?s=400&u=6d20aff99a529254986c9ed3d649b0655d8ad607&v=4" width=115><br><sub>Maycon Reis de Jesus</sub>](https://github.com/mayconreis) |
+| :---: |
