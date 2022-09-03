@@ -1,23 +1,32 @@
 const { Sequelize } = require('sequelize')
 require('dotenv').config()
 
-const sequelize = new Sequelize(process.env.DATABASE_URL,{
-    dialect: "postgres",
-    dialectOptions: {
-        ssl: {
-            require: true, // This will help you. But you will see nwe error
-            rejectUnauthorized: false // This line will fix new error
+
+let sequelize
+if (process.env.DATABASE_URL) {
+    sequelize = new Sequelize(process.env.DATABASE_URL, {
+        dialect: "postgres",
+        dialectOptions: {
+            ssl: {
+                require: true, // This will help you. But you will see nwe error
+                rejectUnauthorized: false // This line will fix new error
+            }
+        },
+    }
+    )
+} else {
+    sequelize = new Sequelize(
+        process.env.DB_NAME,
+        process.env.DB_USER,
+        process.env.DB_PASS,
+        {
+            host: process.env.DB_HOST,
+            dialect: 'mysql'
         }
-    },
+    )
 }
-    // process.env.DB_NAME,
-    // process.env.DB_USER,
-    // process.env.DB_PASS,
-    // {
-    //     host: process.env.DB_HOST,
-    //     dialect: 'mysql'
-    // }
-)
+
+
 
 sequelize.authenticate()
     .then(() => {
